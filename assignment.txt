@@ -1,0 +1,129 @@
+Зертханалық-тәжірибелік жұмыс № …
+Тақырыбы:
+
+CI/CD негіздері: GitHub Actions көмегімен үздіксіз интеграция және жеткізуді іске асыру
+
+Мақсаты:
+
+Білім алушыларды CI/CD (Continuous Integration / Continuous Delivery) ұғымымен таныстыру;
+GitHub Actions көмегімен автоматты түрде:
+
+кодты тексеру;
+
+жобаны жинау (build);
+
+нәтижені орналастыру (deploy)
+процестерін іске асыру дағдыларын қалыптастыру.
+
+Теориялық қысқаша мәлімет:
+
+CI (Continuous Integration) – кодтағы өзгерістерді репозиторийге жіберген сайын автоматты түрде тексеру.
+
+CD (Continuous Delivery/Deployment) – тексерілген кодты автоматты түрде дайын ортаға жеткізу.
+
+Pipeline – CI/CD қадамдарының реттелген тізбегі.
+
+GitHub Actions – GitHub ішіндегі автоматтандыру құралы.
+
+Қолданылатын құралдар:
+
+GitHub репозиторий
+
+GitHub Actions
+
+HTML жобасы (алдыңғы зертханалардан)
+
+Git (қосымша)
+
+Жұмыс барысы (қадам-қадам бойынша)
+1-қадам. CI/CD workflow құрылымын дайындау
+
+Репозиторий түбірінде келесі каталогты жасаңыз:
+
+.github/workflows
+
+
+Жаңа файл құрыңыз:
+
+ci-cd.yml
+
+2-қадам. CI қадамын (Build & Test) іске қосу
+
+ci-cd.yml файлына келесі кодты жазыңыз:
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Репозиторийді жүктеу
+        uses: actions/checkout@v3
+
+      - name: Build қадамы
+        run: echo "Жоба сәтті жиналды"
+
+      - name: Тест қадамы
+        run: echo "Тесттер сәтті өтті"
+
+3-қадам. Workflow-ты репозиторийге жіберу
+
+Өзгерістерді сақтаңыз:
+
+git add .github/workflows/ci-cd.yml
+git commit -m "CI/CD workflow қосылды"
+git push origin master
+
+4-қадам. CI процесін тексеру
+
+GitHub-та репозиторий бетіне өтіңіз.
+
+Actions қойындысын ашыңыз.
+
+Pipeline іске қосылғанын және сәтті аяқталғанын тексеріңіз.
+
+5-қадам. CD қадамын қосу (шартты орналастыру)
+
+ci-cd.yml файлын толықтырыңыз:
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Орналастыру
+        run: echo "Қосымша production ортасына орналастырылды"
+
+6-қадам. CI/CD толық жұмысын тексеру
+
+Файлды сақтаңыз және қайта жіберіңіз:
+
+git add .github/workflows/ci-cd.yml
+git commit -m "CD қадамы қосылды"
+git push origin master
+
+
+Actions бөлімінде екі job (build + deploy) орындалғанын тексеріңіз.
+
+Командаларға нұсқаулық
+Команда	Түсіндірме
+git add .	Файлдарды индекс аймағына қосу
+git commit -m	Өзгерістерді сақтау
+git push	GitHub-қа жіберу
+GitHub Actions	CI/CD-ны автоматтандыру
+Тапсырма:
+
+CI/CD pipeline құрыңыз.
+
+Push немесе Pull Request кезінде автоматты түрде іске қосылуын тексеріңіз.
+
+Build және Deploy қадамдарын қосыңыз.
+
+Pipeline сәтті орындалғанын скриншотпен растаңыз.
+
